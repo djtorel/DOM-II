@@ -43,6 +43,9 @@ mapAll('p', element => {
       e.target.classList.remove('text-big');
     }
   });
+  element.addEventListener('contextmenu', e => {
+    e.preventDefault();
+  });
 });
 
 bySelector('body', element => {
