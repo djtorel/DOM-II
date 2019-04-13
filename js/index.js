@@ -80,7 +80,7 @@ mapAll('a', element => {
   });
 });
 
-mapAll('h2', element => {
+mapAll('h2, h3, h4', element => {
   element.addEventListener('click', e => {
     if (lastClicked) {
       lastClicked.classList.remove('text-focus');
@@ -90,5 +90,3 @@ mapAll('h2', element => {
     lastClicked = e.target;
   });
 });
-
-// mvp complete
