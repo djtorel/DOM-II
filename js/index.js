@@ -34,6 +34,14 @@ mapAll('p', element => {
     e.target.classList.add('text-focus');
     lastClicked = e.target;
   });
+  element.addEventListener('wheel', e => {
+    if (e.deltaY < 0) {
+      e.target.classList.add('text-big');
+    }
+    if (e.deltaY > 0) {
+      e.target.classList.remove('text-big');
+    }
+  });
 });
 
 bySelector('body', element => {
