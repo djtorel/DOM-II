@@ -30,6 +30,7 @@ mapAll('p', element => {
     e.stopPropagation();
     if (lastClicked) {
       lastClicked.classList.remove('text-focus');
+      lastClicked = null;
     }
     e.target.classList.add('text-focus');
     lastClicked = e.target;
@@ -46,6 +47,9 @@ mapAll('p', element => {
 
 bySelector('body', element => {
   element.addEventListener('mousedown', () => {
-    lastClicked.classList.remove('text-focus');
+    if (lastClicked) {
+      lastClicked.classList.remove('text-focus');
+      lastClicked = null;
+    }
   });
 });
