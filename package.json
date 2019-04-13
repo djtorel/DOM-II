@@ -4,6 +4,9 @@
   "main": "index.js",
   "repository": "git@github.com:djtorel/DOM-II.git",
   "author": "Dominic Torruellas <dom@domtorr.com>",
+  "scripts": {
+    "start": "less-watch-compiler less css index.less"
+  },
   "license": "MIT",
   "devDependencies": {
     "eslint": "^5.16.0"
