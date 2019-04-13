@@ -23,3 +23,21 @@ mapAll('img', element => {
     e.target.classList.remove('blur-image');
   });
 });
+
+let lastClicked = null;
+mapAll('p', element => {
+  element.addEventListener('mousedown', e => {
+    e.stopPropagation();
+    if (lastClicked) {
+      lastClicked.classList.remove('text-focus');
+    }
+    e.target.classList.add('text-focus');
+    lastClicked = e.target;
+  });
+});
+
+bySelector('body', element => {
+  element.addEventListener('mousedown', () => {
+    lastClicked.classList.remove('text-focus');
+  });
+});
