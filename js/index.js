@@ -56,3 +56,13 @@ bySelector('body', element => {
     }
   });
 });
+
+mapAll('a', element => {
+  const originalSize = element.style.fontSize;
+  element.addEventListener('mouseover', e => {
+    e.target.style.fontSize = '2.5rem';
+  });
+  element.addEventListener('mouseout', e => {
+    e.target.style.fontSize = originalSize;
+  });
+});
