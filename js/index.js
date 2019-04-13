@@ -46,6 +46,9 @@ mapAll('p', element => {
   element.addEventListener('contextmenu', e => {
     e.preventDefault();
   });
+  element.addEventListener('dblclick', e => {
+    e.target.classList.add('text-big');
+  });
 });
 
 bySelector('body', element => {
@@ -64,5 +67,16 @@ mapAll('a', element => {
   });
   element.addEventListener('mouseout', e => {
     e.target.style.fontSize = originalSize;
+  });
+});
+
+mapAll('h2', element => {
+  element.addEventListener('click', e => {
+    if (lastClicked) {
+      lastClicked.classList.remove('text-focus');
+      lastClicked = null;
+    }
+    e.target.classList.add('text-focus');
+    lastClicked = e.target;
   });
 });
