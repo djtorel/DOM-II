@@ -58,6 +58,16 @@ bySelector('body', element => {
       lastClicked = null;
     }
   });
+
+  const originalColor = element.style.backgroundColor;
+  element.addEventListener('keydown', e => {
+    if (e.key === 'r') {
+      e.target.style.backgroundColor = 'red';
+    }
+    if (e.key === 'e') {
+      e.target.style.backgroundColor = originalColor;
+    }
+  });
 });
 
 mapAll('a', element => {
