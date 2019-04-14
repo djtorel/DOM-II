@@ -75,9 +75,9 @@ const preventDefault = event => {
 // A closure function that stores a previous element state so that it can be
 // used to toggle a class off or on an element.
 // If the 'previous element' is not clicked it removes the class from the
-// previous element.
-// If a new class is clicked and 'removeOnly' is not false, it addes the class
-// to the event target by calling the addClass helper above
+// previous event target.
+// If a new event target is clicked and 'removeOnly' is not false, it addes the
+// class to the event target by calling the addClass helper above
 const toggleClass = () => {
   let previousElement = null;
   return (className, removeOnly = false) => event => {
