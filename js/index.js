@@ -10,12 +10,12 @@ const bySelectorAll = (selector, cb = false) => {
   return cb ? cb(nodeList) : nodeList;
 };
 
-const mapAll = (selector, cb) => {
+const forAll = (selector, cb) => {
   const nodeArr = Array.from(bySelectorAll(selector));
-  return nodeArr.map(cb);
+  return nodeArr.forEach(cb);
 };
 
-mapAll('img', element => {
+forAll('img', element => {
   element.addEventListener('mouseenter', e => {
     e.target.classList.add('blur-image');
   });
@@ -25,7 +25,7 @@ mapAll('img', element => {
 });
 
 let lastClicked = null;
-mapAll('p', element => {
+forAll('p', element => {
   element.addEventListener('mousedown', e => {
     e.stopPropagation();
     if (lastClicked) {
@@ -70,7 +70,7 @@ bySelector('body', element => {
   });
 });
 
-mapAll('a', element => {
+forAll('a', element => {
   const originalSize = element.style.fontSize;
   element.addEventListener('mouseover', e => {
     e.target.style.fontSize = '2.5rem';
@@ -80,7 +80,7 @@ mapAll('a', element => {
   });
 });
 
-mapAll('h2, h3, h4', element => {
+forAll('h2, h3, h4', element => {
   element.addEventListener('click', e => {
     if (lastClicked) {
       lastClicked.classList.remove('text-focus');
