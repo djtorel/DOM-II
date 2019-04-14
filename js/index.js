@@ -15,42 +15,57 @@ const forAll = (selector, cb) => {
 };
 // General Utility Selector Functions -- End
 
+// Curry Function borrowed from:
+// https://mostly-adequate.gitbooks.io/mostly-adequate-guide/appendix_a.html#curry
+// curry :: ((a, b, ...) -> c) -> a -> b -> ... -> c
+function curry(fn) {
+  const arity = fn.length;
+
+  return function $curry(...args) {
+    if (args.length < arity) {
+      return $curry.bind(null, ...args);
+    }
+
+    return fn.call(null, ...args);
+  };
+}
+
 /**
  * In the below section I have refactored all of the things I was doing with
  * events to reusable functional components
  */
 
 //  Function to add an array of event listeners to a given element
-const addListeners = listenerArr => element => {
+const addListeners = curry((listenerArr, element) => {
   listenerArr.forEach(([event, cb]) => element.addEventListener(event, cb));
-};
+});
 
 // Function to add a class to a given event target
-const addClass = classToAdd => ({ target: { classList } }) => {
+const addClass = curry((classToAdd, { target: { classList } }) => {
   classList.add(classToAdd);
-};
+});
 
 // Function to remove a class from a given event target
-const removeClass = classToRemove => ({ target: { classList } }) => {
+const removeClass = curry((classToRemove, { target: { classList } }) => {
   classList.remove(classToRemove);
-};
+});
 
 // Function to toggle a style on & off for a given event target
-const toggleStyle = (styleName, styleValue) => ({ target: { style } }) => {
+const toggleStyle = curry((styleName, styleValue, { target: { style } }) => {
   if (style[styleName] !== styleValue) {
     style[styleName] = styleValue;
   } else {
     style[styleName] = '';
   }
-};
+});
 
 // Function that takes in an event and trigger key, if the event key matches
 // the trigger key it calls a callback with the event
-const eventKey = (triggerKey, cb) => event => {
+const eventKey = curry((triggerKey, cb, event) => {
   if (triggerKey === event.key) {
     cb(event);
   }
-};
+});
 
 // Function to prevent the default for a given event
 const preventDefault = event => {
@@ -67,12 +82,12 @@ const toggleClass = () => {
   let previousElement = null;
   return (className, removeOnly = false) => event => {
     event.stopPropagation();
-    if (previousElement) {
-      removeClass(className)(previousElement);
+    if (previousElement && previousElement !== event) {
+      removeClass(className, previousElement);
       previousElement = null;
     }
     if (!removeOnly) {
-      addClass(className)(event);
+      addClass(className, event);
       previousElement = event;
     }
   };
@@ -86,10 +101,10 @@ const toggleFocusClass = toggleClass();
 // and removes the class when the mouse wheel scrolls down
 const wheelToggleClass = className => event => {
   if (event.deltaY < 0) {
-    addClass(className)(event);
+    addClass(className, event);
   }
   if (event.deltaY > 0) {
-    removeClass(className)(event);
+    removeClass(className, event);
   }
 };
 
