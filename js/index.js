@@ -25,17 +25,17 @@ const addListeners = listenerArr => element => {
   listenerArr.forEach(([event, cb]) => element.addEventListener(event, cb));
 };
 
-// Function to add a class to a given element
+// Function to add a class to a given event target
 const addClass = classToAdd => ({ target: { classList } }) => {
   classList.add(classToAdd);
 };
 
-// Function to remove a class from a given element
+// Function to remove a class from a given event target
 const removeClass = classToRemove => ({ target: { classList } }) => {
   classList.remove(classToRemove);
 };
 
-// Function to toggle a style on & off for a given element
+// Function to toggle a style on & off for a given event target
 const toggleStyle = (styleName, styleValue) => ({ target: { style } }) => {
   if (style[styleName] !== styleValue) {
     style[styleName] = styleValue;
