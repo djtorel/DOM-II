@@ -99,14 +99,14 @@ const toggleFocusClass = toggleClass();
 
 // A function that toggles a class on when the mouse wheel is scrolled up
 // and removes the class when the mouse wheel scrolls down
-const wheelToggleClass = className => event => {
+const wheelToggleClass = curry((className, event) => {
   if (event.deltaY < 0) {
     addClass(className, event);
   }
   if (event.deltaY > 0) {
     removeClass(className, event);
   }
-};
+});
 
 // Event listeners for all 'img' tags -- Start
 forAll(
