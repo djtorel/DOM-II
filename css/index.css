@@ -180,6 +180,7 @@ img {
   background: #FFFFFF;
   border-bottom: 2px dashed #C0C0C0;
   position: fixed;
+  z-index: 1;
 }
 .main-navigation .nav-container {
   height: 100%;
@@ -349,4 +350,15 @@ img {
 .home .content-pick .destination .btn:hover {
   background: #FFFFFF;
   color: #17A2B8;
+}
+.blur-image {
+  filter: blur(2px) opacity(0.75) sepia(0.33) saturate(2);
+  z-index: 0;
+}
+.text-focus {
+  color: #DADADA;
+  background-color: #3e3e3e;
+}
+.text-big {
+  font-size: 3rem;
 }
